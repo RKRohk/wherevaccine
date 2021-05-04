@@ -15,6 +15,7 @@ const Centres: React.FC<{ district: number; age: number }> = (props) => {
       return data.data;
     }
   );
+  if (!data?.centers) return <div></div>;
   console.log("Data", data);
   return <CentresTable age={props.age} centers={data?.centers}></CentresTable>;
 };

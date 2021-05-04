@@ -1,3 +1,4 @@
+import { Box, Container, Flex, Spacer } from "@chakra-ui/layout";
 import { Select } from "@chakra-ui/select";
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
@@ -16,33 +17,40 @@ const Home = ({ states }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [age, setAge] = useState<number>();
   return (
     <div>
-      <Select
-        placeholder="Select a state"
-        onChange={(e) => setState(parseInt(e.target.value))}
-      >
-        {states.map((state) => (
-          <option value={state.state_id}>{state.state_name}</option>
-        ))}
-      </Select>
-      <Select
-        placeholder="Select a District"
-        onChange={(e) => setDistrict(parseInt(e.target.value))}
-      >
-        {data?.districts.map((district: District) => {
-          return (
-            <option value={district.district_id}>
-              {district.district_name}
-            </option>
-          );
-        })}
-      </Select>
-      <Select
-        placeholder="Age bracket"
-        onChange={(e) => setAge(parseInt(e.target.value))}
-      >
-        <option value={45}> {"45 or above"} </option>
-        <option value={18}>{"18 to 45"}</option>
-      </Select>
+      <Box mt={"20"}>
+        <Flex px="72">
+          <Select
+            placeholder="Select a state"
+            onChange={(e) => setState(parseInt(e.target.value))}
+          >
+            {states.map((state) => (
+              <option value={state.state_id}>{state.state_name}</option>
+            ))}
+          </Select>
+          <Spacer />
+          <Select
+            placeholder="Select a District"
+            onChange={(e) => setDistrict(parseInt(e.target.value))}
+          >
+            {data?.districts.map((district: District) => {
+              return (
+                <option value={district.district_id}>
+                  {district.district_name}
+                </option>
+              );
+            })}
+          </Select>
+          <Spacer />
+          <Select
+            placeholder="Age bracket"
+            onChange={(e) => setAge(parseInt(e.target.value))}
+          >
+            <option value={45}> {"45 or above"} </option>
+            <option value={18}>{"18 to 45"}</option>
+          </Select>
+        </Flex>
+      </Box>
+      <Box h={"20"} />
       <Centres age={age} district={district}></Centres>
     </div>
   );
